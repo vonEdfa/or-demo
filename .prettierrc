@@ -1,7 +1,11 @@
 {
+  "parser": "babel",
   "endOfLine": "lf",
   "semi": false,
-  "singleQuote": false,
+  "singleQuote": true,
   "tabWidth": 2,
+  "useTabs": false,
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
   "trailingComma": "es5"
 }
