@@ -4,6 +4,7 @@ import { Link } from 'gatsby';
 import Layout from '../components/layout';
 import Image from '../components/image';
 import SEO from '../components/seo';
+
 import Paper from '../elements/iso216-paper';
 
 const IndexPage = () => (
@@ -17,7 +18,7 @@ const IndexPage = () => (
     </div>
     <Link to="/page-2/">Go to page 2</Link>
     <Paper
-      //fitWidth={false}
+      showDebug={true}
     >
       <p>Test</p>
     </Paper>

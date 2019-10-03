@@ -1,7 +1,103 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Styled, { css } from 'styled-components';
 
 const iso216AspectRatio = 1.4142; // 1:1.4142
+const paperSizes = {
+  'A4': { width: '210mm', height: '297mm'},
+};
+const supportedSizes = Object.keys(paperSizes);
+const defaultPaperMargin = '2.54cm';
+
+const AspectRatioWrapper = Styled.div`
+  position: relative;
+  border: solid 1px rgba(240, 240, 240, 0.65);
+  box-shadow: 0px 0px 20px rgb(240, 240, 240);
+
+  ${props => props.pdfPreview ? css({
+    width: paperSizes[props.size].width,
+    height: paperSizes[props.size].height,
+    fontSize: '12pt',
+
+    h1: {
+      fontSize: '24pt',
+    }
+  }) : css({
+    width: '100%',
+    paddingTop: `${100 * iso216AspectRatio}%`,
+  })}
+`;
+
+const ContentWrapper = Styled.div`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    padding: ${props => props.paperMargins};
+    /* padding-right: 2.54cm; */
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  > header, > div:first-child {
+    padding: ${props => props.paperMargins};
+    padding-bottom: 0;
+  }
+  > footer, > div:last-child {
+    padding: ${props => props.paperMargins};
+    padding-top: 0;
+  }
+`;
+
+const Debug = Styled.div`
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  z-index: 100;
+  padding: 0 !important;
+  transition-duration: 0.2s;
+
+  > div {
+    padding: 5px 10px 5px 10px !important;
+    margin: 0;
+    background-color: black;
+    color: white;
+    opacity: 0.6;
+    font-size: 12px;
+    line-height: 1.3em;
+    font-family: monospace;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    position: relative;
+    top: 0;
+    pointer-events: none;
+    transition-duration: 0.2s;
+    transition-delay: 2s;
+  }
+
+  &:hover > div {
+    opacity: 0.1;
+    top: -100%;
+    transition-delay: 0s;
+  }
+  &:active > div {
+    pointer-events: none;
+    opacity: 0.1;
+  }
+
+  > div p, > div div {
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+  > div p.size {
+    margin-right: 10px;
+    font-size: 1.5em;
+  }
+`;
 
 class PaperLayout extends Component {
   constructor(props) {
@@ -27,72 +123,82 @@ class PaperLayout extends Component {
   calculateActualSize = () => {
     const actualSize = { 
       height: this.paperElement.clientHeight,
-      width: this.paperElement.clientWidth
+      width: this.paperElement.clientWidth,
+      heightMm: this.calculatePxToMm(this.paperElement.clientHeight),
+      widthMm: this.calculatePxToMm(this.paperElement.clientWidth)
     };
     this.setState({ actualSize });
   }
 
-  render() {
-    const { width, height, fitWidth, children } = this.props;
+  calculatePxToMm = (px) => {
+    return Math.round(px / (this.calcMm.clientWidth / 100));
+  }
 
-    const outerElementStyle = {
-      position: 'relative',
-      border: 'solid 1px rgb(240, 240, 240, 0.65)',
-      boxShadow: '0px 0px 20px rgb(240, 240, 240)'
-    };
-    if (fitWidth) {
-      outerElementStyle.width = width;
-      outerElementStyle.paddingTop = `${100 * iso216AspectRatio}%`;
-    } else {
-      outerElementStyle.height = height;
-      outerElementStyle.width = `calc(${height} * ${1 / iso216AspectRatio})`;
-    }
+  render() {
+    const {
+      children,
+      showDebug,
+      size,
+      pdfPreview,
+      paperMargins,
+    } = this.props;
+
+    const { actualSize } = this.state;
+
+    // TODO: Cleanup!
+    // if (fitWidth) {
+    //   outerElementStyle.width = width;
+    //   outerElementStyle.paddingTop = `${100 * iso216AspectRatio}%`;
+    // } else {
+    //   outerElementStyle.height = height;
+    //   outerElementStyle.width = `calc(${height} * ${1 / iso216AspectRatio})`;
+    // }
 
     return (
-      <div
+      <AspectRatioWrapper
         ref={ (paperElement) => this.paperElement = paperElement }
-        style={ outerElementStyle }
+        size={ size }
+        pdfPreview={ pdfPreview }
       >
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-          }}
+        <ContentWrapper
+          paperMargins={paperMargins}
         >
-          <div
-            style={{
-              position:'absolute',
-              right: 0,
-            }}
-          >
-            <p>
-              H: {this.state.actualSize.height}
-              <br/>
-              W: {this.state.actualSize.width}
-            </p>
-          </div>
+          {showDebug && (
+            <Debug>
+              <div>
+                {pdfPreview && <p className='size'>{size}</p>}
+                <p>
+                  H: {actualSize.height}px ({actualSize.heightMm}mm)
+                  <br/>
+                  W: {actualSize.width}px ({actualSize.widthMm}mm)
+                </p>
+              </div>
+              <div ref={ (calcMm) => this.calcMm = calcMm } style={{ width: '100mm', visibility: 'hidden', position: 'absolute' }} />
+            </Debug>
+          )}
           {children}
-        </div>
-      </div>
+        </ContentWrapper>
+      </AspectRatioWrapper>
     );
   }
 }
 
 PaperLayout.defaultProps = {
   children: '',
-  fitWidth: true,
-  width: '100%',
-  height: '90vh',
+  showDebug: false,
+  landscape: false, // TODO: Implement
+  paperMargins: defaultPaperMargin,
+  pdfPreview: false,
+  size: 'A4',
 };
 
 PaperLayout.propTypes = {
   children: PropTypes.node,
-  fitWidth: PropTypes.bool,
-  width: PropTypes.width,
-  height: PropTypes.height,
+  showDebug: PropTypes.bool,
+  landscape: PropTypes.bool,
+  paperMargins: PropTypes.string,
+  pdfPreview: PropTypes.bool,
+  size: PropTypes.oneOf(supportedSizes),
 };
 
 export default PaperLayout;
