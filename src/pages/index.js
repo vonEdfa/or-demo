@@ -6,6 +6,7 @@ import Image from '../components/image';
 import SEO from '../components/seo';
 
 import Paper from '../elements/iso216-paper';
+import A4 from '../elements/a4';
 
 const IndexPage = () => (
   <Layout>
@@ -22,6 +23,9 @@ const IndexPage = () => (
     >
       <p>Test</p>
     </Paper>
+    <A4>
+      <p>A4</p>
+    </A4>
   </Layout>
 );
 
