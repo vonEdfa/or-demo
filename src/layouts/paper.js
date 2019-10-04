@@ -8,6 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Styled from 'styled-components';
+import './paper.css';
 
 const BodyWrapper = Styled.div`
   width: 100%;

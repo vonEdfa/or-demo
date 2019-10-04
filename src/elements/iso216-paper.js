@@ -11,14 +11,18 @@ const defaultPaperMargin = '2.54cm';
 
 const AspectRatioWrapper = styled.div`
   position: relative;
-  border: solid 1px rgba(14, 14, 14, 0.14);
+  /* border: solid 1px rgba(14, 14, 14, 0.14); */
   box-shadow: 0px 0px 20px rgb(14, 14, 24);
-  background-color: rgb(255, 255, 255);
+
+  background-color: #e6e6e6;
+  color: #232526;
+  font-family: 'Roboto Slab', Georgia, 'Times New Roman', Times, serif;
 
   @media print {
     border: initial;
     box-shadow: initial;
-    background-color: initial;
+    width: 100%;
+    height: 100vh;
   }
 
   ${props => props.pdfPreview ? css({
@@ -84,12 +88,11 @@ const Debug = styled.div`
     opacity: 0.6;
     font-size: 12px;
     line-height: 1.3em;
-    font-family: monospace;
+    font-family: 'Source Code Pro', 'Courier New', Courier, monospace;
     display: flex;
     align-items: center;
     border-radius: 5px;
     position: relative;
-    top: 0;
     pointer-events: none;
     transition-duration: 0.2s;
     transition-delay: 2s;
@@ -97,7 +100,6 @@ const Debug = styled.div`
 
   &:hover > div, &:active > div, &:focus > div {
     opacity: 0.1;
-    /* top: -100%; */
     transition-delay: 0s;
   }
   &:active > div {
@@ -186,9 +188,9 @@ class PaperLayout extends Component {
               <div>
                 {pdfPreview && <p className='size'>{size}</p>}
                 <p>
-                  H: {actualSize.height}px ({actualSize.heightMm}mm)
-                  <br/>
                   W: {actualSize.width}px ({actualSize.widthMm}mm)
+                  <br/>
+                  H: {actualSize.height}px ({actualSize.heightMm}mm)
                 </p>
               </div>
               <div ref={ (calcMm) => this.calcMm = calcMm } style={{ width: '100mm', visibility: 'hidden', position: 'absolute' }} />

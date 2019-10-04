@@ -16,8 +16,11 @@ const HeaderWrapper = styled.header`
     padding: 0;
   }
 
-  background-color: #ccc;
-`;
+  background-color: #232526;
+  color: #e6e6e6;
+
+  @import url('https://fonts.googleapis.com/css?family=Arimo:400,700|Roboto+Slab|Source+Code+Pro&display=swap');
+`; // TODO: Don't import fonts here :(
 
 const BuzzWords = styled.div`
   display: flex;
@@ -37,6 +40,9 @@ const BuzzWords = styled.div`
   p:after {
     content: '.'
   }
+  p {
+    padding-bottom: 0.25em;
+  }
 `;
 
 const ContactInfo = styled.div`
@@ -47,6 +53,11 @@ const ContactInfo = styled.div`
   font-family: 'Arimo', sans-serif;
   font-weight: normal;
   font-size: 10pt;
+  color: #a0a5a7;
+
+  p, a {
+    padding-bottom: 0.5em;
+  }
 `;
 
 const Name = styled.div`
@@ -65,6 +76,7 @@ const FirstName = styled.h1`
   font-family: 'Arimo', sans-serif;
   font-weight: normal;
   font-size: 12pt !important;
+  color: #a0a5a7;
 `;
 
 const SurName = styled.h1`
