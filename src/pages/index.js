@@ -1,12 +1,9 @@
 import React from 'react';
 import { Link } from 'gatsby';
 
-import Layout from '../components/layout';
+import Layout from '../layouts/layout';
 import Image from '../components/image';
 import SEO from '../components/seo';
-
-import Paper from '../elements/iso216-paper';
-import A4 from '../elements/a4';
 
 const IndexPage = () => (
   <Layout>
@@ -18,14 +15,7 @@ const IndexPage = () => (
       <Image />
     </div>
     <Link to="/page-2/">Go to page 2</Link>
-    <Paper
-      showDebug={true}
-    >
-      <p>Test</p>
-    </Paper>
-    <A4>
-      <p>A4</p>
-    </A4>
+    <Link to="/paper/">Go to paper demo</Link>
   </Layout>
 );
 

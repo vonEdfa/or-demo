@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Styled from 'styled-components';
+import styled from 'styled-components';
 
-const HeaderWrapper = Styled.header`
+const HeaderWrapper = styled.header`
   width: 100%;
   height: 20%;
   flex-grow: 0;
@@ -19,56 +19,79 @@ const HeaderWrapper = Styled.header`
   background-color: #ccc;
 `;
 
-const BuzzWords = Styled.div`
+const BuzzWords = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
   max-height: 50%;
+  text-transform: uppercase;
+  font-family: 'Arimo', sans-serif;
+  font-weight: bold;
+  font-size: 12pt;
+
+  p:first-child {
+    font-family: 'Roboto Slab', serif;
+    font-weight: normal;
+    font-size: 14pt;
+  }
+  p:after {
+    content: '.'
+  }
 `;
 
-const ContactInfo = Styled.div`
+const ContactInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: end;
   max-height: 50%;
+  font-family: 'Arimo', sans-serif;
+  font-weight: normal;
+  font-size: 10pt;
 `;
 
-const Name = Styled.div`
+const Name = styled.div`
   position: absolute;
   bottom: 0;
 `;
 
-const FirstName = Styled.h1`
+const FirstName = styled.h1`
   padding: 0;
   margin: 0;
   line-height: 1em;
   position: absolute;
-  top: -10%;
+  bottom: calc(0.75 * 72pt - 12pt / 2);
   left: 1%;
+  text-transform: uppercase;
+  font-family: 'Arimo', sans-serif;
+  font-weight: normal;
+  font-size: 12pt !important;
 `;
 
-const SurName = Styled.h1`
+const SurName = styled.h1`
   padding: 0;
   margin: 0;
   font-size: 70pt !important;
   line-height: 0.75em;
+  font-family: 'Roboto Slab', serif;
+  font-weight: normal;
+  font-size: 72pt;
 `;
 
 const Header = () => {
   return(
     <HeaderWrapper>
       <BuzzWords>
-        <p>Foo.</p>
-        <p>Bar.</p>
-        <p>Baz.</p>
+        <p>Foo</p>
+        <p>Bar</p>
+        <p>Baz</p>
       </BuzzWords>
       <ContactInfo>
         <p>Me</p>
         <p>Moi</p>
       </ContactInfo>
       <Name>
-        <FirstName>Pre</FirstName>
-        <SurName>Header</SurName>
+        <FirstName>Sup</FirstName>
+        <SurName>preHeader</SurName>
       </Name>
     </HeaderWrapper>
   );

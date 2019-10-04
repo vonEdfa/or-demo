@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const iso216AspectRatio = 1.4142; // 1:1.4142
 const paperSizes = {
@@ -9,10 +9,17 @@ const paperSizes = {
 const supportedSizes = Object.keys(paperSizes);
 const defaultPaperMargin = '2.54cm';
 
-const AspectRatioWrapper = Styled.div`
+const AspectRatioWrapper = styled.div`
   position: relative;
-  border: solid 1px rgba(240, 240, 240, 0.65);
-  box-shadow: 0px 0px 20px rgb(240, 240, 240);
+  border: solid 1px rgba(14, 14, 14, 0.14);
+  box-shadow: 0px 0px 20px rgb(14, 14, 24);
+  background-color: rgb(255, 255, 255);
+
+  @media print {
+    border: initial;
+    box-shadow: initial;
+    background-color: initial;
+  }
 
   ${props => props.pdfPreview ? css({
     width: paperSizes[props.size].width,
@@ -28,9 +35,12 @@ const AspectRatioWrapper = Styled.div`
   })}
 `;
 
-const ContentWrapper = Styled.div`
+const ContentWrapper = styled.div`
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
 
@@ -50,13 +60,21 @@ const ContentWrapper = Styled.div`
   }
 `;
 
-const Debug = Styled.div`
+const Debug = styled.div`
   position: absolute;
   right: 5px;
   top: 5px;
   z-index: 100;
   padding: 0 !important;
   transition-duration: 0.2s;
+
+  @media print {
+    display: none;
+  }
+
+  &:active {
+    pointer-events: none;
+  }
 
   > div {
     padding: 5px 10px 5px 10px !important;
@@ -77,14 +95,14 @@ const Debug = Styled.div`
     transition-delay: 2s;
   }
 
-  &:hover > div {
+  &:hover > div, &:active > div, &:focus > div {
     opacity: 0.1;
-    top: -100%;
+    /* top: -100%; */
     transition-delay: 0s;
   }
   &:active > div {
     pointer-events: none;
-    opacity: 0.1;
+    opacity: 0;
   }
 
   > div p, > div div {
