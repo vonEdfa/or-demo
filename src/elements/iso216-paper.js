@@ -141,6 +141,10 @@ class PaperLayout extends Component {
   }
 
   calculateActualSize = () => {
+    if (!this.paperElement) {
+      return;
+    }
+
     const actualSize = { 
       height: this.paperElement.clientHeight,
       width: this.paperElement.clientWidth,
@@ -151,6 +155,9 @@ class PaperLayout extends Component {
   }
 
   calculatePxToMm = (px) => {
+    if (!this.calcMm) {
+      return 0;
+    }
     return Math.round(px / (this.calcMm.clientWidth / 100));
   }
 
