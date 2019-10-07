@@ -16,7 +16,7 @@ const AspectRatioWrapper = styled.div`
 
   background-color: #e6e6e6;
   color: #232526;
-  font-family: 'Roboto Slab', Georgia, 'Times New Roman', Times, serif;
+  font-family: 'Roboto Slab', Georgia, 'Times New Roman', Times, serif; /* TODO: Make/use font variables instead */
 
   @media print {
     border: initial;
@@ -26,8 +26,8 @@ const AspectRatioWrapper = styled.div`
   }
 
   ${props => props.pdfPreview ? css({
-    width: paperSizes[props.size].width,
-    height: paperSizes[props.size].height,
+    width: paperSizes[props.paperSize].width,
+    height: paperSizes[props.paperSize].height,
     fontSize: '12pt',
 
     h1: {
@@ -164,10 +164,10 @@ class PaperLayout extends Component {
   render() {
     const {
       children,
-      showDebug,
-      size,
-      pdfPreview,
+      paperSize,
       paperMargins,
+      pdfPreview,
+      showDebug,
     } = this.props;
 
     const { actualSize } = this.state;
@@ -184,7 +184,7 @@ class PaperLayout extends Component {
     return (
       <AspectRatioWrapper
         ref={ (paperElement) => this.paperElement = paperElement }
-        size={ size }
+        paperSize={ paperSize }
         pdfPreview={ pdfPreview }
       >
         <ContentWrapper
@@ -193,7 +193,7 @@ class PaperLayout extends Component {
           {showDebug && (
             <Debug>
               <div>
-                {pdfPreview && <p className='size'>{size}</p>}
+                {pdfPreview && <p className='size'>{paperSize}</p>}
                 <p>
                   W: {actualSize.width}px ({actualSize.widthMm}mm)
                   <br/>
@@ -212,20 +212,20 @@ class PaperLayout extends Component {
 
 PaperLayout.defaultProps = {
   children: '',
-  showDebug: false,
   landscape: false, // TODO: Implement
   paperMargins: defaultPaperMargin,
+  paperSize: 'A4',
   pdfPreview: false,
-  size: 'A4',
+  showDebug: false,
 };
 
 PaperLayout.propTypes = {
   children: PropTypes.node,
-  showDebug: PropTypes.bool,
   landscape: PropTypes.bool,
   paperMargins: PropTypes.string,
+  paperSize: PropTypes.oneOf(supportedSizes),
   pdfPreview: PropTypes.bool,
-  size: PropTypes.oneOf(supportedSizes),
+  showDebug: PropTypes.bool,
 };
 
 export default PaperLayout;
