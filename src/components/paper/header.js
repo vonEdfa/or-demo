@@ -2,13 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import StylizedName from './stylized-name';
+
 const HeaderWrapper = styled.header`
   width: 100%;
-  height: 20%;
   flex-grow: 0;
   overflow: hidden;
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 
   p {
@@ -18,9 +20,22 @@ const HeaderWrapper = styled.header`
 
   background-color: #232526;
   color: #e6e6e6;
+`;
 
-  @import url('https://fonts.googleapis.com/css?family=Arimo:400,700|Roboto+Slab|Source+Code+Pro&display=swap');
-`; // TODO: Don't import fonts here :(
+const HeaderTop = styled.div`
+  width: 100%;
+  flex-grow: 0;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+`;
 
 const BuzzWords = styled.div`
   display: flex;
@@ -60,51 +75,22 @@ const ContactInfo = styled.div`
   }
 `;
 
-const Name = styled.div`
-  position: absolute;
-  bottom: 0;
-`;
-
-const FirstName = styled.h1`
-  padding: 0;
-  margin: 0;
-  line-height: 1em;
-  position: absolute;
-  bottom: calc(0.75 * 72pt - 12pt / 2);
-  left: 1%;
-  text-transform: uppercase;
-  font-family: 'Arimo', sans-serif;
-  font-weight: normal;
-  font-size: 12pt !important;
-  color: #a0a5a7;
-`;
-
-const SurName = styled.h1`
-  padding: 0;
-  margin: 0;
-  font-size: 70pt !important;
-  line-height: 0.75em;
-  font-family: 'Roboto Slab', serif;
-  font-weight: normal;
-  font-size: 72pt;
-`;
-
 const Header = () => {
+
   return(
     <HeaderWrapper>
-      <BuzzWords>
-        <p>Foo</p>
-        <p>Bar</p>
-        <p>Baz</p>
-      </BuzzWords>
-      <ContactInfo>
-        <p>Me</p>
-        <p>Moi</p>
-      </ContactInfo>
-      <Name>
-        <FirstName>Sup</FirstName>
-        <SurName>preHeader</SurName>
-      </Name>
+      <HeaderTop>
+        <BuzzWords>
+          <p>Foo</p>
+          <p>Bar</p>
+          <p>Baz</p>
+        </BuzzWords>
+        <ContactInfo>
+          <p>@tweetMe</p>
+          <p>contact@example.com</p>
+        </ContactInfo>
+      </HeaderTop>
+      <StylizedName/>
     </HeaderWrapper>
   );
 };

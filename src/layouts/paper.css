@@ -1,4 +1,14 @@
 @page {
-	size: A4 portrait;
+	/* size: A4 portrait; */
 	margin: 0cm;
+}
+
+body {
+	background-color: rgb(40,40,40);
+}
+
+@media print {
+	body {
+		background-color: initial;
+	}
 }

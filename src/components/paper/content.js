@@ -11,7 +11,8 @@ const Content = ({ children }) => {
         flexGrow: 1,
         display: 'flex',
         flexDirection: 'row',
-        paddingTop: '2.5%',
+        paddingTop: '2em',
+        paddingBottom: '2em',
       }}
     >
       <Columns>

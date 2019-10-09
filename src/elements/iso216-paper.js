@@ -13,6 +13,7 @@ const AspectRatioWrapper = styled.div`
   position: relative;
   /* border: solid 1px rgba(14, 14, 14, 0.14); */
   box-shadow: 0px 0px 20px rgb(14, 14, 24);
+  overflow: hidden;
 
   background-color: #e6e6e6;
   color: #232526;

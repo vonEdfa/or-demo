@@ -8,12 +8,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Styled from 'styled-components';
+import './global.css';
 import './paper.css';
 
 const BodyWrapper = Styled.div`
   width: 100%;
   min-height: 100vh;
-  background-color: rgb(40,40,40);
   padding: 100px;
 
   & > div {

@@ -9,7 +9,7 @@ import Footer from '../components/paper/footer';
 
 const A4 = ({ children }) => {
   return(
-    <ISO216 pdfPreview={true} showDebug={false} paperSize='A4' paperMargins='2.5% 2.5% 0'>
+    <ISO216 pdfPreview={true} showDebug={false} paperSize='A4' paperMargins='2rem 2rem 0'>
       <Header/>
       <Content>
         {children}
