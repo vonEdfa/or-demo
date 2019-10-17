@@ -76,7 +76,6 @@ const ContactInfo = styled.div`
 `;
 
 const Header = () => {
-
   return(
     <HeaderWrapper>
       <HeaderTop>

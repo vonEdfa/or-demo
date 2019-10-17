@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StylizedName renders correctly 1`] = `
+"<div class=\\"sc-bdVaJa czRHzE\\">
+  <h1 class=\\"sc-bwzfXH CmELq\\">Name</h1>
+  <h1 class=\\"sc-htpNat eGCyKc\\">Surname</h1>
+</div>"
+`;
+
+exports[`StylizedName renders correctly 2`] = `
+"<div class=\\"sc-bdVaJa czRHzE\\">
+  <h1 class=\\"sc-bwzfXH CmELq\\">Hello</h1>
+  <h1 class=\\"sc-htpNat eGCyKc\\">World</h1>
+</div>"
+`;
+
+exports[`StylizedName renders correctly 3`] = `
+"<div class=\\"sc-bdVaJa bexPbI\\">
+  <h1 class=\\"sc-bwzfXH edVCEj\\">Hello</h1>
+  <h1 class=\\"sc-htpNat eGCyKc\\">world</h1>
+</div>"
+`;
+
+exports[`StylizedName uses the correct styles 1`] = `[Function]`;
+
+exports[`StylizedName uses the correct styles 2`] = `
+.c0 {
+  position: relative;
+}
+
+.c0:nth-child(2) {
+  margin-top: 2.5em;
+}
+
+.c1 {
+  padding: 0;
+  margin: 0;
+  line-height: 1em;
+  position: absolute;
+  top: -0.2em;
+  left: 0;
+  text-transform: uppercase;
+  font-family: 'Arimo',sans-serif;
+  font-weight: normal;
+  font-size: 12pt !important;
+  color: #a0a5a7;
+  z-index: 10;
+}
+
+.c2 {
+  padding: 0;
+  margin: 0;
+  font-size: 70pt !important;
+  line-height: 0.74em;
+  font-family: 'Roboto Slab',serif;
+  font-weight: normal;
+  font-size: 72pt;
+  position: relative;
+  left: -0.01em;
+}
+
+<div
+  className="c0"
+>
+  <h1
+    className="c1"
+  >
+    Name
+  </h1>
+  <h1
+    className="c2"
+  >
+    von Surname
+  </h1>
+</div>
+`;
